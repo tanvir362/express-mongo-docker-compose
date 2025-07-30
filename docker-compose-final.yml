@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    image: ghcr.io/tanvir362/express-mongo-docker-api:latest
+    container_name: express-mongo-docker-api
+    environment:
+      - MONGO_URI
+      - PORT
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
